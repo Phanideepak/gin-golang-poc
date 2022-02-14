@@ -1,6 +1,7 @@
 package models
 
 import (
+	"github.com/deepak/ems/api/dto"
 	"github.com/deepak/ems/config"
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -17,12 +18,13 @@ type Employee struct {
 	JoiningDate   string `json:"joining_date"`
 	CreatedBy     string `json:"created_by"`
 	LastUpdatedBy string `json:"last_updated_by"`
-	Salary        string `json:"salary"`
+	Salary        uint   `json:"salary"`
 	DepartmentId  uint   `json:"department_id"`
 }
 
-func GetAllEmployees(employee *[]Employee) (err error) {
-	if err := config.DB.Find(employee).Error; err != nil {
+func GetAllEmployees(employee *[]dto.Employee) (err error) {
+
+	if err := config.DB.Table("employee").Select("employee.id,employee.first_name, employee.last_name, employee.email, employee.phone_number, employee.age, employee.job, employee.birth_date, employee.joining_date, employee.created_by, employee.last_updated_by, employee.salary,department.dept_name").Joins("join department on employee.department_id = department.id").Find(employee).Error; err != nil {
 		return err
 	}
 	return nil

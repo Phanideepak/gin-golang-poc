@@ -23,6 +23,7 @@ func SetupRouter() *gin.Engine {
 		group2.POST("add", controllers.PostEmployee)
 		group2.PUT("edit/:id", controllers.EditEmployee)
 		group2.DELETE("delete/:id", controllers.DeleteEmployee)
+		group2.PUT("/giveHike", controllers.GiveEmployeeBonus)
 	}
 	return r
 }
