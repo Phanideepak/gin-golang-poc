@@ -54,6 +54,15 @@ func DeleteEmployee(emp *Employee, id string) (err error) {
 	return nil
 }
 
+func GetNthHighestSalary(emp *[]dto.Employee, n string) (err error) {
+	query := "SELECT employee.id,employee.first_name, employee.last_name, employee.email, employee.phone_number, employee.age, employee.job, employee.birth_date, employee.joining_date, employee.created_by, employee.last_updated_by, employee.salary,department.dept_name from employee join department on employee.department_id = department.id where salary = (select g.salary from (Select e.salary from  employee e order by salary desc limit " + n + ") as g order by salary limit 1);"
+
+	if err := config.DB.Raw(query).Find(&emp).Error; err != nil {
+		return err
+	}
+	return nil
+}
+
 func (b *Employee) TableName() string {
 	return "employee"
 }

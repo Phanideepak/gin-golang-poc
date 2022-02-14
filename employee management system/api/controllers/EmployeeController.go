@@ -105,3 +105,17 @@ func GiveEmployeeBonus(c *gin.Context) {
 		})
 	}
 }
+
+func GetNthHighestSalary(c *gin.Context) {
+	var emp []dto.Employee
+	n := c.Query("n")
+	err := models.GetNthHighestSalary(&emp, n)
+	if err != nil {
+		c.AbortWithStatus(http.StatusNotFound)
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"data":    emp,
+			"success": "data fetched successfully",
+		})
+	}
+}

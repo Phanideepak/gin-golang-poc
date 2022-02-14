@@ -20,6 +20,7 @@ func SetupRouter() *gin.Engine {
 	{
 		group2.GET("/all", controllers.GetAllEmployees)
 		group2.GET(":id", controllers.GetEmployee)
+		group2.GET("get/nth-salaried_employee", controllers.GetNthHighestSalary)
 		group2.POST("add", controllers.PostEmployee)
 		group2.PUT("edit/:id", controllers.EditEmployee)
 		group2.DELETE("delete/:id", controllers.DeleteEmployee)
