@@ -1,0 +1,13 @@
+ GIN - golang web framework:
+
+Source: https://github.com/gin-gonic/gin#contents
+
+1.) gin.H refers to the map[string]interface{} . We create maps in json using gin.H
+
+2.)Context is the most important part of gin. It allows us to pass variables between middleware, 
+   // manage the flow, validate the JSON of a request and render a JSON response for example. ... 
+   // Errors is a list of errors attached to all the handlers/middlewares who used this context.
+3.)gin Context -> Param is used for parameters in api path (path parameters).
+               ->Query is used for query parameter. (Query parameters)
+               ->PostForm is used to post formdata
+
